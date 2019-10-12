@@ -1,41 +1,65 @@
 from tkinter import *
-from tkinter.ttk import Combobox
-from tkcalendar import DateEntry
+import tkinter.ttk as ttk
 
 
 class InReparationWindow:
     """Class for window to repair"""
 
     def __init__(self):
-        master = Tk()
-        listbox = Listbox(master, width=100, height=20)
+        root = Tk()
+        root.title('Vehiculos en Reparacion')
 
-        listbox.grid(row=0, column=0, columnspan=4, padx=5, pady=5)
+        list_headers = ['vehiculo', 'placa', 'cliente']
+        list_values = [
+        ('Aveo', 'AZ-OIUYG', "Maria Perez") ,
+        ('Spark', 'FR-9874', "Jose Perez") ,
+        ('Lacetti', 'WA-8764', 'Luis Rodriguez') ,
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Aveo', 'AZ-OIUYG', "Maria Perez"),
+        ('Spark', 'FR-9874', "Jose Perez"),
+        ('Lacetti', 'WA-8764', 'Luis Rodriguez'),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Aveo', 'AZ-OIUYG', "Maria Perez"),
+        ('Spark', 'FR-9874', "Jose Perez"),
+        ('Lacetti', 'WA-8764', 'Luis Rodriguez'),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Aveo', 'AZ-OIUYG', "Maria Perez"),
+        ('Spark', 'FR-9874', "Jose Perez"),
+        ('Lacetti', 'WA-8764', 'Luis Rodriguez'),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza"),
+        ('Cruze', 'BO-123D6', "Marcos Mendoza")
+        ]
 
-        #listbox.pack(side="left", fill="y")
-        # scrollbar = Scrollbar(master, orient="vertical")
-        # scrollbar.config(command=listbox.yview)
-        # scrollbar.pack(side="right", fill="y")
-        # listbox.config(yscrollcommand=scrollbar.set)
-        #
-        #
-        list_values = ["one", "two", "three", "four", "hhh", "uuuu", "jjjj", "oooo", "mmmm", "tttt",
-                       "iii", "ggg", "ddd", "zzz", "aaaa"]
-        #
+        client_frame = LabelFrame(root, text="Vehiculos en Reparacion")
+        client_frame.grid(row=0, column=0, columnspan=4, padx=5, pady=5)
+
+        tree = ttk.Treeview(client_frame, columns=list_headers, show="headings")
+        tree.grid(row=0, column=0, padx=5, pady=5)
+        vsb = ttk.Scrollbar(client_frame, orient="vertical", command=tree.yview)
+        vsb.grid(row=0, column=1, sticky='ns')
+
+        tree.configure(yscrollcommand=vsb.set)
+
+
+        for col in list_headers:
+            tree.heading(col, text=col.title())
         for item in list_values:
-            listbox.insert(END, item)
-        #
-        def testing():
-            value = listbox.curselection()
-            print(list_values[value[0]])
-            listbox.delete(ANCHOR)
-        #
-        #
-        #
-        btn = Button(master, text="Finalizar", command=testing)
+            tree.insert('', 'end', values=item)
+
+        def selectItem():
+            curItem = tree.focus()
+            print(tree.item(curItem))
+            tree.delete(curItem)
+
+
+        btn = Button(root, text="Finalizar Reparacion", command=selectItem)
         btn.grid(row=1, column=0, columnspan=4, padx=5, pady=5)
 
         mainloop()
-
-
-InReparationWindow()

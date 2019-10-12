@@ -1,5 +1,6 @@
 from tkinter import *
 
+from interface_graphic.in_reparation_window import InReparationWindow
 from interface_graphic.new_vehicle_window import NewVehicleWindow
 from interface_graphic.new_reparation_window import NewReparationWindow
 from settings import IMAGE_MENU
@@ -28,7 +29,7 @@ class MenuWindow:
         button = Button(button_frame, text="Nueva Reparacion", height=15, width=40, command=NewReparationWindow)
         button.grid(row=0, column=1, padx=8, pady=10, sticky=W+E)
 
-        button = Button(button_frame, text="Vehiculos en Reparacion", height=15, width=40)
+        button = Button(button_frame, text="Vehiculos en Reparacion", height=15, width=40, command=InReparationWindow)
         button.grid(row=0, column=2, padx=8, pady=10, sticky=W+E)
 
         button = Button(button_frame, text="Historial de Vehiculos", height=15, width=40)
